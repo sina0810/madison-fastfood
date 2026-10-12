@@ -1,0 +1,406 @@
+/* ---------- Header ---------- */
+.header {
+  background: var(--primary);
+  color: var(--white);
+  padding: 22px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.location {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.location a {
+  margin-top: 4px;
+  color: var(--white);
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+
+.location a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.logo {
+  font-size: 28px;
+  letter-spacing: 0.5px;
+}
+
+.tagline {
+  margin-top: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+/* ---------- Two-column layout: sidebar | content ---------- */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout {
+  flex: 1;
+  display: flex;
+}
+
+/* ---------- Left sidebar ---------- */
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--white);
+  padding: 32px 16px;
+  border-right: 1px solid var(--border);
+}
+
+.sidebar-title {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-link {
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-size: 17px;
+  color: var(--text);
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 17px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sidebar-link:hover {
+  background: var(--primary-tint);
+}
+
+.sidebar-link.active {
+  background: var(--primary-tint);
+  border-left-color: var(--primary);
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+/* ---------- Opening hours (bottom of sidebar) ---------- */
+.hours {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.hours dl {
+  margin: 0;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hours-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hours dt {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.hours dd {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ---------- Right content area ---------- */
+.content {
+  flex: 1;
+  padding: 40px 48px;
+}
+
+.menu-section-title {
+  font-size: 30px;
+  margin-bottom: 24px;
+}
+
+.menu-note {
+  background: var(--primary-tint);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 12px 12px 0;
+  padding: 14px 20px;
+  margin-bottom: 24px;
+  font-size: 16px;
+}
+
+.menu-empty {
+  font-size: 18px;
+  color: var(--text-muted);
+  border: 1px dashed var(--border);
+  border-radius: 16px;
+  padding: 48px;
+  text-align: center;
+}
+
+.menu-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.menu-card {
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+
+.menu-card:hover,
+.menu-card:has(.menu-card-button:focus-visible) {
+  border-color: var(--primary);
+}
+
+/* The dish name is a button whose clickable area stretches over the whole card. */
+.menu-card-button {
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.menu-card-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.menu-card-button:focus-visible {
+  outline: none;
+}
+
+.menu-card:has(.menu-card-button:focus-visible) {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Every picture gets the same 4:3 shape; extra edges are cropped off neatly. */
+.menu-card-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--primary-tint);
+}
+
+.menu-card-body {
+  padding: 20px 24px 24px;
+}
+
+.menu-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.menu-card h3 {
+  font-size: 18px;
+}
+
+.menu-price {
+  padding-top: 2px;
+  color: var(--primary-dark);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.menu-card p {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ---------- Dish details pop-up ---------- */
+.item-dialog {
+  width: min(440px, calc(100vw - 32px));
+  padding: 0;
+  border: none;
+  border-radius: 16px;
+  color: var(--text);
+  box-shadow: 0 12px 40px rgba(43, 43, 51, 0.25);
+}
+
+.item-dialog::backdrop {
+  background: rgba(43, 43, 51, 0.5);
+}
+
+.item-dialog-box {
+  padding: 28px 32px 32px;
+}
+
+.item-dialog-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.item-dialog-top h2 {
+  font-size: 24px;
+}
+
+.item-dialog-close {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  font-size: 16px;
+  color: var(--text-muted);
+  background: var(--primary-tint);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.item-dialog-close:hover {
+  color: var(--primary-dark);
+}
+
+.item-dialog-price {
+  margin-top: 4px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.item-dialog-description {
+  margin-top: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.item-dialog-subtitle {
+  margin-top: 24px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+}
+
+.item-dialog-list {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.item-dialog-list li {
+  padding-left: 20px;
+  position: relative;
+}
+
+.item-dialog-list li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  background: var(--text);
+  color: var(--white);
+  padding: 48px 40px 24px;
+}
+
+.footer a {
+  color: var(--white);
+  text-underline-offset: 3px;
+}
+
+.footer-columns {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 40px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.footer address {
+  font-style: normal;
+}
+
+.footer-brand {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.footer-title {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--primary-light);
+  margin-bottom: 8px;
+}
+
+.footer-muted {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.footer-social {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  gap: 16px;
+}
+
+.footer-bottom {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.65);
+}
