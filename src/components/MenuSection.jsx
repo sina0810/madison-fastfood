@@ -24,7 +24,7 @@ export default function MenuSection({ category }) {
                       {item.name}
                     </button>
                   </h3>
-                  <span className="menu-price">${item.price.toFixed(2)}</span>
+                  <span className="menu-price">{item.formattedPrice()}</span>
                 </div>
                 {item.description && <p>{item.description}</p>}
               </div>

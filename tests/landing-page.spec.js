@@ -80,8 +80,8 @@ test('clicking a dish opens its details, and the pop-up closes', async ({ page }
   // Opens with name, price and every "included" part.
   await main.getByRole('button', { name: item.name, exact: true }).click()
   await expect(dialog).toBeVisible()
-  await expect(dialog.getByText(`$${item.price.toFixed(2)}`)).toBeVisible()
-  for (const part of item.includes) {
+  await expect(dialog.getByText(item.formattedPrice())).toBeVisible()
+  for (const part of item.getIncludes()) {
     await expect(dialog.getByText(part, { exact: true })).toBeVisible()
   }
 
@@ -112,11 +112,29 @@ test('every dish opens a pop-up with its own details', async ({ page }) => {
       await main.getByRole('button', { name: item.name, exact: true }).click()
       const dialog = page.getByRole('dialog', { name: item.name })
       await expect(dialog).toBeVisible()
-      await expect(dialog.getByText(`$${item.price.toFixed(2)}`)).toBeVisible()
+      await expect(dialog.getByText(item.formattedPrice())).toBeVisible()
       await page.keyboard.press('Escape')
       await expect(dialog).toBeHidden()
     }
   }
+})
+
+test('a meal pop-up lists the drink and side, a plate pop-up does not', async ({ page }) => {
+  await page.goto('/')
+  const main = page.getByRole('main')
+  const dialog = page.getByRole('dialog', { name: 'Chicken over Rice' })
+
+  await categoryButton(page, 'Meals').click()
+  await main.getByRole('button', { name: 'Chicken over Rice', exact: true }).click()
+  await expect(dialog.getByText('A drink of your choice')).toBeVisible()
+  await expect(dialog.getByText('Fries or salad')).toBeVisible()
+  await page.keyboard.press('Escape')
+
+  await categoryButton(page, 'Plates').click()
+  await main.getByRole('button', { name: 'Chicken over Rice', exact: true }).click()
+  await expect(dialog.getByText('Grilled chicken', { exact: true })).toBeVisible()
+  await expect(dialog.getByText('A drink of your choice')).toHaveCount(0)
+  await expect(dialog.getByText('Fries or salad')).toHaveCount(0)
 })
 
 test('footer shows address, hours, phone, social links and copyright', async ({ page }) => {
