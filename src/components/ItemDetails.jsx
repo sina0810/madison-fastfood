@@ -11,6 +11,9 @@ export default function ItemDetails({ item, onClose }) {
 
   if (!item) return null
 
+  // Ask the object for its list: a Meal adds the drink and side by itself.
+  const includes = item.getIncludes()
+
   function closeOnBackdropClick(event) {
     // The dialog element itself is only "hit" when clicking outside the inner box.
     if (event.target === dialogRef.current) dialogRef.current.close()
@@ -25,14 +28,14 @@ export default function ItemDetails({ item, onClose }) {
             ✕
           </button>
         </div>
-        <p className="item-dialog-price">${item.price.toFixed(2)}</p>
+        <p className="item-dialog-price">{item.formattedPrice()}</p>
         {item.description && <p className="item-dialog-description">{item.description}</p>}
 
-        {item.includes && (
+        {includes.length > 0 && (
           <>
             <h3 className="item-dialog-subtitle">What's included</h3>
             <ul className="item-dialog-list">
-              {item.includes.map((part) => (
+              {includes.map((part) => (
                 <li key={part}>{part}</li>
               ))}
             </ul>
